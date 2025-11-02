@@ -1,0 +1,86 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.0-RC1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'tech.sascha'
+version = '0.0.1-SNAPSHOT'
+description = 'display all the skinshards'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-liquibase'
+	implementation 'org.springframework.boot:spring-boot-starter-restclient'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-liquibase-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	outputs.dir snippetsDir
+	useJUnitPlatform()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+def getOS() {
+    return System.getProperty('os.name').toLowerCase()
+}
+
+def buildCommandLine(String command) {
+    def os = getOS()
+
+    if (os.contains("windows")) {
+        ["cmd", "/c", command]
+    } else if (os.contains("mac") || os.contains("linux")) {
+        ["sh", "-c", command]
+    } else {
+        throw new GradleException("Unsupported operating system: " + os)
+    }
+}
+
+task startDB(type: Exec) {
+    group('tech')
+    commandLine buildCommandLine('docker-compose -f src/main/docker/postgres.yml -f src/main/docker/base.yml up -d')
+}
+
+task stopDB(type: Exec) {
+    group('tech')
+    commandLine buildCommandLine('docker-compose -f src/main/docker/postgres.yml down')
+}

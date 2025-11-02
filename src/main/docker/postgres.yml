@@ -1,0 +1,12 @@
+services:
+  db:
+    image: 'postgres:latest'
+    container_name: docker-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=lolskins
+    ports:
+      - 5432:5432
+    networks:
+      - lolskins
