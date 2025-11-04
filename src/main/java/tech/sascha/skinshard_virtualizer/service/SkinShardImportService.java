@@ -43,7 +43,7 @@ public class SkinShardImportService {
             String displayCategories = (String) entry.get("displayCategories");
             String type = (String) entry.get("type");
             if (!isSkin(displayCategories, type)) {
-                continue;
+                //continue;
             }
 
             String lootId = (String) entry.get("lootId");
@@ -58,6 +58,7 @@ public class SkinShardImportService {
             skinShard.setUpgradeEssenceValue(toInt(entry.get("upgradeEssenceValue")));
             skinShard.setValue(toInt(entry.get("value")));
             skinShard.setCount(toInt(entry.get("count")));
+            skinShard.setAsset((String) entry.get("asset"));
             String splashPath = (String) entry.get("splashPath");
             skinShard.setSplashPath(splashPath);
 

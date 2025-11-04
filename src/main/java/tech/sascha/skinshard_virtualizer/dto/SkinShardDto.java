@@ -13,6 +13,10 @@ public class SkinShardDto {
     private Integer upgradeEssenceValue;
     private Integer value;
     private Boolean wanted;
+    private Boolean sell;
+    private Boolean reroll;
     private String imageUrl;
     private Boolean ownsAnySKinForChampion;
+    private Integer count;
+    private String asset;
 }

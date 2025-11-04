@@ -15,6 +15,10 @@ public class SkinShardMapper {
         dto.setDisenchantValue(entity.getDisenchantValue());
         dto.setUpgradeEssenceValue(entity.getUpgradeEssenceValue());
         dto.setValue(entity.getValue());
+        dto.setReroll(entity.getReroll());
+        dto.setSell(entity.getSell());
+        dto.setAsset(entity.getAsset());
+        dto.setCount(entity.getCount());
         dto.setWanted(entity.getWanted() != null ? entity.getWanted() : false);
         if (entity.getChampion() != null) {
             dto.setChampionName(entity.getChampion().getName());

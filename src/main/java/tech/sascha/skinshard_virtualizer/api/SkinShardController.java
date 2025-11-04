@@ -35,4 +35,22 @@ public class SkinShardController {
                         .toDto(skinShardService
                                        .setWanted(id, value)));
     }
+
+    @PatchMapping("/{id}/reroll")
+    public ResponseEntity<SkinShardDto> setReroll(@PathVariable Long id,
+                                                  @RequestParam boolean value) {
+        return ResponseEntity.ok(
+                skinShardMapper
+                        .toDto(skinShardService
+                                       .setReroll(id, value)));
+    }
+
+    @PatchMapping("/{id}/sell")
+    public ResponseEntity<SkinShardDto> setSell(@PathVariable Long id,
+                                                  @RequestParam boolean value) {
+        return ResponseEntity.ok(
+                skinShardMapper
+                        .toDto(skinShardService
+                                       .setSell(id, value)));
+    }
 }

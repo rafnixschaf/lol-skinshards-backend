@@ -40,6 +40,12 @@ public class SkinShard extends BaseEntity{
 
     private Boolean wanted = false;
 
+    private Boolean sell = false;
+
+    private Boolean reroll = false;
+
+    private String asset;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "champion_id")
     private Champion champion;

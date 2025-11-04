@@ -33,6 +33,24 @@ public class SkinShardService {
 
     }
 
+    public SkinShard setReroll(Long id, Boolean isWanted) {
+        SkinShard skinShard = skinShardRepository.findById(id)
+                                                 .orElseThrow(() -> new RuntimeException("Skin not found"));
+
+        skinShard.setReroll(isWanted);
+        return skinShardRepository.save(skinShard);
+
+    }
+
+    public SkinShard setSell(Long id, Boolean isWanted) {
+        SkinShard skinShard = skinShardRepository.findById(id)
+                                                 .orElseThrow(() -> new RuntimeException("Skin not found"));
+
+        skinShard.setSell(isWanted);
+        return skinShardRepository.save(skinShard);
+
+    }
+
     public List<SkinShardDto> getAll() {
 
         List<SkinShard> shards = skinShardRepository.findAllWithChampion();
