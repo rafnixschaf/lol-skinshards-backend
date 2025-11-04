@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tech.sascha.skinshard_virtualizer.model.external.LoLChampion;
+import tech.sascha.skinshard_virtualizer.util.DDragonNameNormalizer;
 
 @Entity
 @NoArgsConstructor
@@ -17,8 +19,16 @@ public class Champion extends BaseEntity {
 
     private String riotKey;
 
+    @Column(name = "champion_id", unique = true)
+    private Long championId;
+
     public Champion(String name) {
         this.name = name;
+    }
+
+    public Champion(LoLChampion champion) {
+        this.name = DDragonNameNormalizer.normalize(champion.getName());
+        this.championId = champion.getId();
     }
 
 

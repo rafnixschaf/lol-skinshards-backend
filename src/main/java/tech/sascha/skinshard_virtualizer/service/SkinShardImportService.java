@@ -8,8 +8,6 @@ import tech.sascha.skinshard_virtualizer.LcuClient;
 import tech.sascha.skinshard_virtualizer.model.Champion;
 import tech.sascha.skinshard_virtualizer.model.SkinShard;
 import tech.sascha.skinshard_virtualizer.repository.SkinShardRepository;
-import tech.sascha.skinshard_virtualizer.service.ChampionService;
-import tech.sascha.skinshard_virtualizer.service.ImageDownloadService;
 import tech.sascha.skinshard_virtualizer.util.DDragonNameNormalizer;
 import tech.sascha.skinshard_virtualizer.util.SplashPathParser;
 
@@ -18,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class SkinImportService {
+public class SkinShardImportService {
 
     private final LcuClient lcuClient;
     private final ChampionService championService;
@@ -26,11 +24,11 @@ public class SkinImportService {
     private final ImageDownloadService imageDownloader;
     private final String ddragonBase;
 
-    public SkinImportService(LcuClient lcuClient,
-                             ChampionService championService,
-                             SkinShardRepository skinShardRepository,
-                             ImageDownloadService imageDownloader,
-                             @Value("${lol.ddragon-base}") String ddragonBase) {
+    public SkinShardImportService(LcuClient lcuClient,
+                                  ChampionService championService,
+                                  SkinShardRepository skinShardRepository,
+                                  ImageDownloadService imageDownloader,
+                                  @Value("${lol.ddragon-base}") String ddragonBase) {
         this.lcuClient = lcuClient;
         this.championService = championService;
         this.skinShardRepository = skinShardRepository;

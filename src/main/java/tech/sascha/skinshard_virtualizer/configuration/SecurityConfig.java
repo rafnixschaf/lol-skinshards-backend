@@ -20,6 +20,7 @@ public class SecurityConfig {
                                                .requestMatchers("/api/**").permitAll()
                                                .requestMatchers("/skins/**").permitAll()
                                                .requestMatchers("/images/**").permitAll()
+                                               .requestMatchers("/summoner/**").permitAll()
                                                .anyRequest().authenticated()
                                       )
                 .httpBasic(Customizer.withDefaults());

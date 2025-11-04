@@ -14,4 +14,5 @@ public class SkinShardDto {
     private Integer value;
     private Boolean wanted;
     private String imageUrl;
+    private Boolean ownsAnySKinForChampion;
 }
